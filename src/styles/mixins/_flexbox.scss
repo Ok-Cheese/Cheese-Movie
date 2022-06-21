@@ -13,6 +13,7 @@ $FLEX_MAP: (
 
 @mixin flexbox($jc: center, $ai: center, $dir: row) {
   display: flex;
+  flex-direction: $dir;
   align-items: _getFlexValue($ai);
   justify-content: _getFlexValue($jc);
 }

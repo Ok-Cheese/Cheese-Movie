@@ -1,0 +1,61 @@
+@use '/src/styles/constants/colors';
+@use '/src/styles/mixins/flexbox';
+
+.boxOffice {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 100%;
+  height: 100%;
+
+  dl {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 20px 10px 0;
+    color: colors.$GRAYE;
+    background: colors.$BOXOFFICE;
+    border-radius: 5px;
+
+    p {
+      height: 30px;
+      border-bottom: 1px solid colors.$WHITE;
+    }
+
+    div {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: 40px;
+      border-bottom: 1px solid colors.$GRAYE;
+
+      &:last-of-type {
+        border: none;
+      }
+
+      dt {
+        width: 30px;
+        text-align: center;
+      }
+
+      dd {
+        width: 100%;
+        margin: 0 5px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        word-break: break-all;
+        white-space: nowrap;
+      }
+
+      .ratio {
+        width: 50px;
+        font-weight: 500;
+        color: colors.$RED;
+      }
+
+      .increase {
+        color: colors.$GREEN;
+      }
+    }
+  }
+}
