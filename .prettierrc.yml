@@ -1,0 +1,7 @@
+semi: true
+printWidth: 120
+proseWrap: never
+endOfLine: 'auto'
+singleQuote: true
+jsxSingleQuote: true
+htmlWhitespaceSensitivity: 'css'
