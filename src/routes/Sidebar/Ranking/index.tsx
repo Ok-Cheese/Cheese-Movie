@@ -6,7 +6,7 @@ import store from 'store';
 
 import Loading from 'components/Loading';
 
-import { getMovieRanking } from '../utils';
+import { getMovieRanking } from '../../../utils/getMovieRanking';
 
 import styles from './ranking.module.scss';
 
