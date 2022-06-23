@@ -3,20 +3,26 @@ import store from 'store';
 
 import { IContent } from 'types/type';
 
-interface ISavedRankingDate {
-  movie: string;
+interface ISavedDate {
+  popular: string;
+  rated: string;
 }
 
-const savedMovieRanking = store.get('MOVIE_RAKNING');
+const savedMoviePopular = store.get('MOVIE_RAKNING');
+const savedMovieRated = store.get('MOVIE_RATED');
+const savedPopularDate = store.get('Popular_DATE');
 
-export const movieRankingAtom = atom<IContent[]>({
-  key: '#movieRankingAtom',
-  default: savedMovieRanking || null,
+export const moviePopularAtom = atom<IContent[]>({
+  key: '#moviePopularAtom',
+  default: savedMoviePopular || null,
 });
 
-const savedRankingDate = store.get('RANKING_DATE');
+export const movieRatedAtom = atom<IContent[]>({
+  key: '#movieRatedAtom',
+  default: savedMovieRated || null,
+});
 
-export const savedRankingDateAtom = atom<ISavedRankingDate>({
-  key: '#savedRankingDateAtom',
-  default: savedRankingDate || null,
+export const savedPopularDateAtom = atom<ISavedDate>({
+  key: '#savedPopularDateAtom',
+  default: savedPopularDate || null,
 });
