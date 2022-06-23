@@ -1,14 +1,13 @@
-import { useRecoilState } from 'recoil';
-
-import { popularMovieAtom, ratedMovieAtom } from 'states/mainContent';
+import { useAppDispatch, useAppSelector } from 'hooks';
+import { getMainContent, setPopularMovieList, setRatedMovieList } from 'states/mainContent';
 
 import Track from './Track';
 
 import styles from './home.module.scss';
 
 const Search = () => {
-  const [moviePopular, setMoviePopular] = useRecoilState(popularMovieAtom);
-  const [movieRated, setMovieRated] = useRecoilState(ratedMovieAtom);
+  const contentList = useAppSelector(getMainContent);
+  const dispatch = useAppDispatch();
 
   return (
     <div className={styles.home}>
@@ -17,15 +16,15 @@ const Search = () => {
           trackName='Popular'
           type='movie'
           category='popular'
-          content={moviePopular}
-          setContent={setMoviePopular}
+          content={contentList.movie_popular}
+          setContent={dispatch(setPopularMovieList)}
         />
         <Track
           trackName='Top Rated'
           type='movie'
           category='top_rated'
-          content={movieRated}
-          setContent={setMovieRated}
+          content={contentList.movie_top_rated}
+          setContent={dispatch(setRatedMovieList)}
         />
       </div>
     </div>

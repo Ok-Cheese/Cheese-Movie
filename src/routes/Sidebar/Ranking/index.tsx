@@ -1,12 +1,14 @@
+import { useAppSelector } from 'hooks';
 import { useMemo } from 'react';
-import { useRecoilValue } from 'recoil';
-
-import { popularMovieAtom } from 'states/mainContent';
+import { getMainContent } from 'states/mainContent';
 
 import styles from './ranking.module.scss';
 
 const Ranking = () => {
-  const movieRanking = useRecoilValue(popularMovieAtom);
+  const popularMovieList = useAppSelector(getMainContent).movie_popular;
+  const movieRanking = popularMovieList.map(({ id, title }) => {
+    return { id, title };
+  });
 
   const rankingItem = useMemo(() => {
     if (!movieRanking) return '';

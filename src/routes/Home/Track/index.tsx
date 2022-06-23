@@ -1,41 +1,48 @@
 import { useEffect, useMemo, useState } from 'react';
-import { SetterOrUpdater } from 'recoil';
 import { useQuery } from 'react-query';
+import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import dayjs from 'dayjs';
 import store from 'store';
 
 import MovieItem from 'components/MovieItem';
 
-import { getMainContents } from 'utils/getMainContents';
-import { IContent, TCategory, TContentType } from 'types/type';
+import { getSimpleCotentList } from 'utils/getMainContents';
+import { IMovieDetails, ISimpleContent, TCategory, TContentType } from 'types/type';
 
 import styles from './track.module.scss';
+import { useAppSelector } from 'hooks';
+import { getExpireDate } from 'states/expireDate';
 
 interface IProps {
   trackName: string;
   type: TContentType;
   category: TCategory;
-  content: IContent[];
-  setContent: SetterOrUpdater<IContent[]>;
+  content: IMovieDetails[];
+  setContent: ActionCreatorWithPayload<IMovieDetails[], string>;
 }
 
-const contentDate = store.get('CONTENT_DATE');
-
 const Track = ({ trackName, type, category, content, setContent }: IProps) => {
-  const [trackData, setTrackData] = useState<IContent[]>(content);
+  const expireDate = useAppSelector(getExpireDate);
 
+  const [trackData, setTrackData] = useState<ISimpleContent[]>(
+    content.map(({ id, title }) => {
+      return { id, title };
+    })
+  );
+
+  const getTrackData = () => getSimpleCotentList(type, category);
   const trackKey = `${type}_${category}`;
+  const trackExpireData = {
+    movie_popular: expireDate.movie_popular,
+    movie_top_rated: expireDate.movie_top_rated,
+  }[trackKey];
   const isDataStale = useMemo(() => {
-    if (!contentDate) return false;
+    if (!expireDate) return false;
 
-    return content.length === 0 && contentDate[`${trackKey}`] !== dayjs().format('YYMMDD');
-  }, [content.length, trackKey]);
+    return trackData.length === 0 && trackExpireData !== dayjs().format('YYMMDD');
+  }, [expireDate, trackData, trackExpireData]);
 
-  const getTarckContentData = () => {
-    return getMainContents(type, category);
-  };
-
-  const { data } = useQuery([`#${trackKey}`], getTarckContentData, {
+  const { data } = useQuery([`#${trackKey}`], getTrackData, {
     enabled: isDataStale,
     staleTime: 5 * 60 * 1000,
     cacheTime: 5 * 60 * 1000,
@@ -45,17 +52,16 @@ const Track = ({ trackName, type, category, content, setContent }: IProps) => {
     if (!data) return;
 
     setTrackData(data);
-  }, [category, data, setContent, trackKey, type]);
+  }, [data]);
 
-  const trackItems = useMemo(() => {
-    if (trackData.length === 0) return null;
-    return <MovieItem id={trackData[0].id} />;
-  }, [trackData]);
+  /* const trackItems = useMemo(() => {
+    return trackData.map((el, index) => <MovieItem key={el.id} id={el.id} index={index} />);
+  }, [trackData]); */
 
   return (
     <div className={styles.track}>
       <p className={styles.trackName}>{trackName}</p>
-      <ul className={styles.trackList}>{trackItems}</ul>
+      {/* <ul className={styles.trackList}>{trackItems}</ul> */}
     </div>
   );
 };

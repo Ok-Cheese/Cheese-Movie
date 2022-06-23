@@ -1,4 +1,4 @@
-export interface IContent {
+export interface ISimpleContent {
   id: number;
   title: string;
 }

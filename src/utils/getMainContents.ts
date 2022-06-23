@@ -39,7 +39,7 @@ interface ITVResponse {
 
 type IDefaultResponse = IMovieResponse & ITVResponse;
 
-export const getMainContents = async (type: TContentType, category: TCategory) => {
+export const getSimpleCotentList = async (type: TContentType, category: TCategory) => {
   const response = await axios({
     url: `${BASE_URL}/${type}/${category}`,
     params: {
