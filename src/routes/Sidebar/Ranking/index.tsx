@@ -1,12 +1,12 @@
 import { useMemo } from 'react';
 import { useRecoilValue } from 'recoil';
 
-import { moviePopularAtom } from 'states/mainContent';
+import { popularMovieAtom } from 'states/mainContent';
 
 import styles from './ranking.module.scss';
 
 const Ranking = () => {
-  const movieRanking = useRecoilValue(moviePopularAtom);
+  const movieRanking = useRecoilValue(popularMovieAtom);
 
   const rankingItem = useMemo(() => {
     if (!movieRanking) return '';

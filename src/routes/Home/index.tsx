@@ -1,14 +1,14 @@
 import { useRecoilState } from 'recoil';
 
-import { moviePopularAtom, movieRatedAtom } from 'states/mainContent';
+import { popularMovieAtom, ratedMovieAtom } from 'states/mainContent';
 
 import Track from './Track';
 
 import styles from './home.module.scss';
 
 const Search = () => {
-  const [moviePopular, setMoviePopular] = useRecoilState(moviePopularAtom);
-  const [movieRated, setMovieRated] = useRecoilState(movieRatedAtom);
+  const [moviePopular, setMoviePopular] = useRecoilState(popularMovieAtom);
+  const [movieRated, setMovieRated] = useRecoilState(ratedMovieAtom);
 
   return (
     <div className={styles.home}>
