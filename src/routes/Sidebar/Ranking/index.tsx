@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useRecoilValue } from 'recoil';
 
-import { moviePopularAtom } from 'states/movie';
+import { moviePopularAtom } from 'states/mainContent';
 
 import styles from './ranking.module.scss';
 
