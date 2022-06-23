@@ -1,0 +1,16 @@
+@use '/src/styles/constants/colors';
+@use '/src/styles/mixins/flexbox';
+
+.home {
+  padding: 50px;
+  margin-left: 350px;
+
+  .mainContent {
+    width: 100%;
+
+    .movieList {
+      @include flexbox.flexbox(center, center, row);
+      flex-wrap: wrap;
+    }
+  }
+}

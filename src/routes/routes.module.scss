@@ -1,0 +1,9 @@
+@use '/src/styles/constants/colors';
+@use '/src/styles/mixins/flexbox';
+
+.app {
+  width: 100vw;
+  height: 100vh;
+  overflow: scroll;
+  background: colors.$MAIN_FIRST;
+}
