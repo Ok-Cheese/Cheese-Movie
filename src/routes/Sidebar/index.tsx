@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 
-import BoxOffice from './BoxOffice';
+import Ranking from './Ranking';
 
 import styles from './sidebar.module.scss';
 
@@ -26,7 +26,7 @@ const Sidebar = () => {
           <span>즐겨찾기</span>
         </NavLink>
       </nav>
-      <BoxOffice />
+      <Ranking />
     </div>
   );
 };
