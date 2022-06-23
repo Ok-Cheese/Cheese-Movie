@@ -48,10 +48,10 @@ export const getMainContents = async (type: TContentType, category: TCategory) =
     },
   });
 
-  const rankingResult: IDefaultResponse[] = await response.data.results.slice(0, 10);
-  const movieRanking = rankingResult.map((el) => {
+  const result: IDefaultResponse[] = await response.data.results.slice(0, 10);
+  const convertedResult = result.map((el) => {
     return { id: el.id, title: type === 'movie' ? el.title : el.name };
   });
 
-  return movieRanking;
+  return convertedResult;
 };
