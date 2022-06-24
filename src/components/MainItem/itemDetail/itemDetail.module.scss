@@ -1,0 +1,57 @@
+@use '/src/styles/constants/colors';
+@use '/src/styles/mixins/flexbox';
+
+.itemDetail {
+  @include flexbox.flexbox(between, center);
+  width: 430px;
+  height: 320px;
+  padding: 10px;
+  background: colors.$WHITE;
+
+  .posterWrapper {
+    width: 200px;
+    height: 300px;
+  }
+
+  .details {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    height: 300px;
+
+    .title {
+      font-size: 20px;
+    }
+
+    .inform {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0 10px;
+      font-size: 16px;
+
+      svg {
+        width: 16px;
+        height: 16px;
+      }
+    }
+
+    .genreList {
+      display: flex;
+      width: 100%;
+
+      .genre {
+        width: 60px;
+        height: 30px;
+        margin: 0 5px;
+        color: colors.$WHITE;
+        border-radius: 50%;
+      }
+    }
+
+    .overview {
+      font-size: 16px;
+      word-break: keep-all;
+    }
+  }
+}
