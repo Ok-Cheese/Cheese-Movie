@@ -39,7 +39,9 @@ interface ITVResponse {
 
 type IDefaultResponse = IMovieResponse & ITVResponse;
 
-export const getContentIdList = async (type: TContentType, category: TCategory) => {
+export const getContentList = async (type: TContentType, category: TCategory) => {
+  console.count();
+
   const response = await axios({
     url: `${BASE_URL}/${type}/${category}`,
     params: {
@@ -50,7 +52,16 @@ export const getContentIdList = async (type: TContentType, category: TCategory) 
 
   const result: IDefaultResponse[] = await response.data.results.slice(0, 10);
   const convertedResult = result.map((el) => {
-    return { id: el.id, title: type === 'movie' ? el.title : el.name };
+    return {
+      id: el.id,
+      poster: el.poster_path,
+      overview: el.overview,
+      rating: el.vote_average,
+      genre: el.genre_ids,
+      title: type === 'movie' ? el.title : el.name,
+      release: type === 'movie' ? el.release_date : el.first_air_date,
+      adult: type === 'movie' ? el.adult : false,
+    };
   });
 
   return convertedResult;

@@ -2,10 +2,11 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { QueryClient, QueryClientProvider } from 'react-query';
+
+import { store } from 'states';
 import reportWebVitals from './reportWebVitals';
 
 import Routes from './routes';
-import { store } from 'states';
 
 import './styles/index';
 

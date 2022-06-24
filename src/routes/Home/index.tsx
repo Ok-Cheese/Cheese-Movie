@@ -1,38 +1,23 @@
 import { useAppDispatch, useAppSelector } from 'hooks';
-import { IContentList, IIdList } from 'types/type';
-import { getPopularMovie, getRatedMovie, setPoplularMovie, setRatedMovie } from 'states/mainContent';
+import { IItemData } from 'types/type';
 import {
-  getPopularMovieExpireDate,
-  getRatedMovieExpireDate,
-  setPopularMovieExpireDate,
-  setRatedMovieExpireDate,
-} from 'states/expireDate';
-import {
-  getPopularMovieIdList,
-  getRatedMovieIdList,
-  setPopularMovieIdList,
-  setRatedMovieIdList,
-} from 'states/mainContentIdList';
+  setPoplularMovieLIst,
+  setRatedMovieList,
+  getPopularMovieList,
+  getRatedMovieList,
+} from 'states/mainContentList';
 
 import Track from './Track';
 
 import styles from './home.module.scss';
 
 const Search = () => {
-  const popularMovieIdList = useAppSelector(getPopularMovieIdList);
-  const ratedMovieIdList = useAppSelector(getRatedMovieIdList);
-  const popularMovie = useAppSelector(getPopularMovie);
-  const ratedMovie = useAppSelector(getRatedMovie);
-  const popularMovieExpireDate = useAppSelector(getPopularMovieExpireDate);
-  const ratedMovieExpireDate = useAppSelector(getRatedMovieExpireDate);
+  const popularMovieList = useAppSelector(getPopularMovieList);
+  const ratedMovieIdList = useAppSelector(getRatedMovieList);
 
   const dispatch = useAppDispatch();
-  const disPatchPopularMovieIdList = (data: IIdList[]) => dispatch(setPopularMovieIdList(data));
-  const disPatchRatedMovieIdList = (data: IIdList[]) => dispatch(setRatedMovieIdList(data));
-  const disPatchPopularMovie = (data: IContentList[]) => dispatch(setPoplularMovie(data));
-  const disPatchRatedMovie = (data: IContentList[]) => dispatch(setRatedMovie(data));
-  const disPatchPopularMovieExpireDate = (date: string) => dispatch(setPopularMovieExpireDate(date));
-  const disPatchRatedMovieExpireDate = (date: string) => dispatch(setRatedMovieExpireDate(date));
+  const disPatchPopularMovie = (data: IItemData[]) => dispatch(setPoplularMovieLIst(data));
+  const disPatchRatedMovie = (data: IItemData[]) => dispatch(setRatedMovieList(data));
 
   return (
     <div className={styles.home}>
@@ -41,23 +26,15 @@ const Search = () => {
           trackName='Popular'
           type='movie'
           category='popular'
-          idList={popularMovieIdList}
-          content={popularMovie}
-          expireDate={popularMovieExpireDate}
-          setIdList={disPatchPopularMovieIdList}
+          content={popularMovieList}
           setContent={disPatchPopularMovie}
-          setExpireDate={disPatchPopularMovieExpireDate}
         />
         <Track
           trackName='Top Rated'
           type='movie'
           category='top_rated'
-          idList={ratedMovieIdList}
-          content={ratedMovie}
-          expireDate={ratedMovieExpireDate}
-          setIdList={disPatchRatedMovieIdList}
+          content={ratedMovieIdList}
           setContent={disPatchRatedMovie}
-          setExpireDate={disPatchRatedMovieExpireDate}
         />
       </div>
     </div>

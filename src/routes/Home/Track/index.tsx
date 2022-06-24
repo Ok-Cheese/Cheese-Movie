@@ -3,10 +3,12 @@ import { useQuery } from 'react-query';
 import HorizontalScroll from 'react-scroll-horizontal';
 import dayjs from 'dayjs';
 
-import MainItem from 'components/mainItem';
+import { useAppDispatch, useAppSelector } from 'hooks';
+import { IItemData, TCategory, TContentType } from 'types/type';
+import { getRefDate, updateRefDate } from 'states/mainContentList';
+import { getContentList } from 'utils/contentList';
 
-import { IContentList, IIdList, TCategory, TContentType } from 'types/type';
-import { getContentIdList } from 'utils/getContentIdList';
+import MainItem from 'components/MainItem';
 
 import styles from './track.module.scss';
 
@@ -14,33 +16,23 @@ interface IProps {
   trackName: string;
   type: TContentType;
   category: TCategory;
-  idList: IIdList[];
-  content: IContentList[];
-  expireDate: string;
-  setIdList: (data: IIdList[]) => void;
-  setContent: (data: IContentList[]) => void;
-  setExpireDate: (date: string) => void;
+  content: IItemData[];
+  setContent: (data: IItemData[]) => void;
 }
 
-const Track = ({
-  trackName,
-  type,
-  category,
-  idList,
-  content,
-  expireDate,
-  setIdList,
-  setContent,
-  setExpireDate,
-}: IProps) => {
-  const getTrackData = () => getContentIdList(type, category);
+const Track = ({ trackName, type, category, content, setContent }: IProps) => {
+  const refDate = useAppSelector(getRefDate);
+
+  const dispatch = useAppDispatch();
+
+  const getApiData = () => getContentList(type, category);
   const isDataStale = useMemo(() => {
-    if (!expireDate) return true;
+    if (!refDate) return true;
 
-    return idList.length === 0 || expireDate !== dayjs().format('YYMMDD');
-  }, [idList, expireDate]);
+    return content.length === 0 || refDate !== dayjs().format('YYMMDD');
+  }, [content.length, refDate]);
 
-  const { data } = useQuery([`#${type}_${category}`], getTrackData, {
+  const { data } = useQuery([`#${type}_${category}`], getApiData, {
     enabled: isDataStale,
     staleTime: 5 * 60 * 1000,
     cacheTime: 5 * 60 * 1000,
@@ -49,15 +41,13 @@ const Track = ({
   useEffect(() => {
     if (!data) return;
 
-    setIdList(data);
-    setExpireDate(dayjs().format('YYMMDD'));
-  }, [data, setIdList, setExpireDate]);
+    dispatch(updateRefDate());
+    setContent(data);
+  }, [data, dispatch, setContent]);
 
   const trackItems = useMemo(() => {
-    return idList.map((el, index) => (
-      <MainItem key={el.id} id={el.id} index={index} idList={idList} content={content} setContent={setContent} />
-    ));
-  }, [content, idList, setContent]);
+    return content.map((el, index) => <MainItem key={el.id} item={content[index]} />);
+  }, [content]);
 
   return (
     <div className={styles.track}>
