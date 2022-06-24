@@ -1,11 +1,11 @@
 import { useAppSelector } from 'hooks';
 import { useMemo } from 'react';
-import { getPopularMovieList } from 'states/mainContent';
+import { getPopularMovieIdList } from 'states/mainContentIdList';
 
 import styles from './ranking.module.scss';
 
 const Ranking = () => {
-  const popularMovieList = useAppSelector(getPopularMovieList);
+  const popularMovieList = useAppSelector(getPopularMovieIdList);
   const movieRanking = popularMovieList.map(({ id, title }) => {
     return { id, title };
   });

@@ -11,7 +11,7 @@ interface IExpireDate {
 const savedExpireDate = store.get('expireDate');
 
 const INIT_EXPIREDATE: IExpireDate = {
-  movie_popular: savedExpireDate ? savedExpireDate.movie_popluar : '',
+  movie_popular: savedExpireDate ? savedExpireDate.movie_popular : '',
   movie_top_rated: savedExpireDate ? savedExpireDate.movie_top_rated : '',
 };
 
@@ -19,13 +19,13 @@ const expireDateSlice = createSlice({
   name: 'expireDate',
   initialState: INIT_EXPIREDATE,
   reducers: {
-    setPopularMovieDate: (state: IExpireDate, action: PayloadAction<string>) => {
-      const newExpireDate = { ...state, movie_popluar: action.payload };
+    setPopularMovieExpireDate: (state: IExpireDate, action: PayloadAction<string>) => {
+      const newExpireDate = { ...state, movie_popular: action.payload };
       store.set('expireDate', newExpireDate);
       state.movie_popular = action.payload;
     },
-    setRatedMovieDate: (state: IExpireDate, action: PayloadAction<string>) => {
-      const newExpireDate = { ...state, moive_rated: action.payload };
+    setRatedMovieExpireDate: (state: IExpireDate, action: PayloadAction<string>) => {
+      const newExpireDate = { ...state, movie_top_rated: action.payload };
       store.set('expireDate', newExpireDate);
       state.movie_top_rated = action.payload;
     },
@@ -36,5 +36,5 @@ const getPopularMovieExpireDate = (state: RootState) => state.expireDate.movie_p
 const getRatedMovieExpireDate = (state: RootState) => state.expireDate.movie_top_rated;
 
 export default expireDateSlice.reducer;
-export const { setPopularMovieDate, setRatedMovieDate } = expireDateSlice.actions;
+export const { setPopularMovieExpireDate, setRatedMovieExpireDate } = expireDateSlice.actions;
 export { getPopularMovieExpireDate, getRatedMovieExpireDate };

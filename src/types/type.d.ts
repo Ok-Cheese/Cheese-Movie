@@ -1,4 +1,4 @@
-export interface ISimpleContent {
+export interface IIdList {
   id: number;
   title: string;
 }
@@ -6,7 +6,7 @@ export interface ISimpleContent {
 export type TContentType = 'movie' | 'tv';
 export type TCategory = 'popular' | 'top_rated';
 
-export interface IMovieDetails {
+export interface IContentList {
   adult: boolean;
   backdrop_path: string;
   belongs_to_collection: any;
