@@ -1,0 +1,87 @@
+@use '/src/styles/constants/colors';
+@use '/src/styles/mixins/flexbox';
+
+.movieItem {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  justify-content: flex-end;
+  width: 300px;
+  height: 100%;
+  margin: 0 20px;
+
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 5px;
+  }
+
+  .gradient {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0%) 50%, rgba(0, 0, 0, 90%) 70%);
+  }
+
+  .inform {
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 20px;
+
+    .titleWrapper {
+      height: 80px;
+
+      .title {
+        /* stylelint-disable-next-line value-no-vendor-prefix */
+        display: -webkit-box;
+        margin-bottom: 5px;
+        overflow: hidden;
+        font-size: 24px;
+        font-weight: 500;
+        color: colors.$WHITE;
+        text-overflow: ellipsis;
+        word-break: keep-all;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+      }
+
+      .year {
+        margin-bottom: 10px;
+        font-size: 20px;
+        color: colors.$WHITE;
+      }
+    }
+
+    .detailWrapper {
+      @include flexbox.flexbox(between, center);
+      width: 100%;
+
+      .voted {
+        display: flex;
+        align-items: center;
+        font-size: 20px;
+        color: colors.$WHITE;
+
+        svg {
+          width: 20px;
+          height: 20px;
+          fill: colors.$YELLOW;
+        }
+      }
+
+      button {
+        width: 100px;
+        height: 40px;
+        font-size: 16px;
+        color: colors.$WHITE;
+        background: colors.$RED;
+        border-radius: 30px;
+        opacity: 0.8;
+      }
+    }
+  }
+}

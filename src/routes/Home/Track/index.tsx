@@ -1,8 +1,9 @@
 import { useEffect, useMemo } from 'react';
 import { useQuery } from 'react-query';
+import HorizontalScroll from 'react-scroll-horizontal';
 import dayjs from 'dayjs';
 
-import MovieItem from 'components/MovieItem';
+import MainItem from 'components/mainItem';
 
 import { IContentList, IIdList, TCategory, TContentType } from 'types/type';
 import { getContentIdList } from 'utils/getContentIdList';
@@ -54,14 +55,16 @@ const Track = ({
 
   const trackItems = useMemo(() => {
     return idList.map((el, index) => (
-      <MovieItem key={el.id} id={el.id} index={index} idList={idList} content={content} setContent={setContent} />
+      <MainItem key={el.id} id={el.id} index={index} idList={idList} content={content} setContent={setContent} />
     ));
   }, [content, idList, setContent]);
 
   return (
     <div className={styles.track}>
       <p className={styles.trackName}>{trackName}</p>
-      <ul className={styles.trackList}>{trackItems}</ul>
+      <ul className={styles.trackList}>
+        <HorizontalScroll reverseScroll>{trackItems}</HorizontalScroll>
+      </ul>
     </div>
   );
 };
