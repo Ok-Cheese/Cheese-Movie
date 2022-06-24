@@ -11,10 +11,5 @@
 
   .mainContent {
     width: 100%;
-
-    .movieList {
-      @include flexbox.flexbox(center, center, row);
-      flex-wrap: wrap;
-    }
   }
 }
