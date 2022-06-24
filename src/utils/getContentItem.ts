@@ -1,21 +1,21 @@
 import axios from 'axios';
 
-import { IMovieDetails } from 'types/type';
+import { IContentList } from 'types/type';
 
 const BASE_URL = 'https://api.themoviedb.org/3';
 
-export const getPoster = async (movieId: number) => {
-  console.log(1);
+export const getContentItem = async (id: number) => {
+  console.log(id, 1);
 
   const response = await axios({
-    url: `${BASE_URL}/movie/${movieId}`,
+    url: `${BASE_URL}/movie/${id}`,
     params: {
       api_key: process.env.REACT_APP_TMDB_KEY,
       language: 'ko-KR',
     },
   });
 
-  const result: IMovieDetails = await response.data;
+  const result: IContentList = await response.data;
 
   return result;
 };
