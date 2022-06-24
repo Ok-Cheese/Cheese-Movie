@@ -1,48 +1,45 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useQuery } from 'react-query';
-import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import dayjs from 'dayjs';
-import store from 'store';
 
 import MovieItem from 'components/MovieItem';
 
-import { getSimpleCotentList } from 'utils/getMainContents';
-import { IMovieDetails, ISimpleContent, TCategory, TContentType } from 'types/type';
+import { IContentList, IIdList, TCategory, TContentType } from 'types/type';
+import { getContentIdList } from 'utils/getContentIdList';
 
 import styles from './track.module.scss';
-import { useAppSelector } from 'hooks';
-import { getExpireDate } from 'states/expireDate';
 
 interface IProps {
   trackName: string;
   type: TContentType;
   category: TCategory;
-  content: IMovieDetails[];
-  setContent: ActionCreatorWithPayload<IMovieDetails[], string>;
+  idList: IIdList[];
+  content: IContentList[];
+  expireDate: string;
+  setIdList: (data: IIdList[]) => void;
+  setContent: (data: IContentList[]) => void;
+  setExpireDate: (date: string) => void;
 }
 
-const Track = ({ trackName, type, category, content, setContent }: IProps) => {
-  const expireDate = useAppSelector(getExpireDate);
-
-  const [trackData, setTrackData] = useState<ISimpleContent[]>(
-    content.map(({ id, title }) => {
-      return { id, title };
-    })
-  );
-
-  const getTrackData = () => getSimpleCotentList(type, category);
-  const trackKey = `${type}_${category}`;
-  const trackExpireData = {
-    movie_popular: expireDate.movie_popular,
-    movie_top_rated: expireDate.movie_top_rated,
-  }[trackKey];
+const Track = ({
+  trackName,
+  type,
+  category,
+  idList,
+  content,
+  expireDate,
+  setIdList,
+  setContent,
+  setExpireDate,
+}: IProps) => {
+  const getTrackData = () => getContentIdList(type, category);
   const isDataStale = useMemo(() => {
-    if (!expireDate) return false;
+    if (!expireDate) return true;
 
-    return trackData.length === 0 && trackExpireData !== dayjs().format('YYMMDD');
-  }, [expireDate, trackData, trackExpireData]);
+    return idList.length === 0 || expireDate !== dayjs().format('YYMMDD');
+  }, [idList, expireDate]);
 
-  const { data } = useQuery([`#${trackKey}`], getTrackData, {
+  const { data } = useQuery([`#${type}_${category}`], getTrackData, {
     enabled: isDataStale,
     staleTime: 5 * 60 * 1000,
     cacheTime: 5 * 60 * 1000,
@@ -51,17 +48,20 @@ const Track = ({ trackName, type, category, content, setContent }: IProps) => {
   useEffect(() => {
     if (!data) return;
 
-    setTrackData(data);
-  }, [data]);
+    setIdList(data);
+    setExpireDate(dayjs().format('YYMMDD'));
+  }, [data, setIdList, setExpireDate]);
 
-  /* const trackItems = useMemo(() => {
-    return trackData.map((el, index) => <MovieItem key={el.id} id={el.id} index={index} />);
-  }, [trackData]); */
+  const trackItems = useMemo(() => {
+    return idList.map((el, index) => (
+      <MovieItem key={el.id} id={el.id} index={index} idList={idList} content={content} setContent={setContent} />
+    ));
+  }, [content, idList, setContent]);
 
   return (
     <div className={styles.track}>
       <p className={styles.trackName}>{trackName}</p>
-      {/* <ul className={styles.trackList}>{trackItems}</ul> */}
+      <ul className={styles.trackList}>{trackItems}</ul>
     </div>
   );
 };
