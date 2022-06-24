@@ -20,7 +20,7 @@ const MainItem = ({ item }: IProps) => {
       <div className={styles.inform}>
         <div className={styles.titleWrapper}>
           <p className={styles.title}>{item.title}</p>
-          <p className={styles.year}>{item.release.split('-')[0]}</p>
+          <p className={styles.year}>{item.release}</p>
         </div>
         <div className={styles.detailWrapper}>
           <div className={styles.rating}>

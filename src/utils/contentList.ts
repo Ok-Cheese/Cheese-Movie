@@ -53,6 +53,8 @@ export const getContentList = async (type: TContentType, category: TCategory, qu
     },
   });
 
+  const getYear = (date: string) => date.split('-')[0];
+
   const result: IDefaultResponse[] = await response.data.results.slice(0, 10);
   const convertedResult = result.map((el) => {
     return {
@@ -62,8 +64,8 @@ export const getContentList = async (type: TContentType, category: TCategory, qu
       rating: el.vote_average,
       genre: el.genre_ids,
       title: type === 'movie' ? el.title : el.name,
-      release: type === 'movie' ? el.release_date : el.first_air_date,
       adult: type === 'movie' ? el.adult : false,
+      release: getYear(type === 'movie' ? el.release_date : el.first_air_date),
     };
   });
 
