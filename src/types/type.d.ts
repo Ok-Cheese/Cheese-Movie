@@ -1,5 +1,5 @@
 export type TContentType = 'movie' | 'tv';
-export type TCategory = 'popular' | 'top_rated';
+export type TCategory = 'popular' | 'top_rated' | 'search';
 
 export interface IItemData {
   id: number;

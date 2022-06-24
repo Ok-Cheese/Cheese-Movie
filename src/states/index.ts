@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import mainContent from './mainContentList';
+import search from './search';
 
 export const store = configureStore({
   reducer: {
     mainContent,
+    search,
   },
 });
 

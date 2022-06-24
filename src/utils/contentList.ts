@@ -39,14 +39,17 @@ interface ITVResponse {
 
 type IDefaultResponse = IMovieResponse & ITVResponse;
 
-export const getContentList = async (type: TContentType, category: TCategory) => {
+export const getContentList = async (type: TContentType, category: TCategory, query?: string) => {
   console.count();
 
+  const url = category === 'search' ? `${BASE_URL}/search/${type}` : `${BASE_URL}/${type}/${category}`;
+
   const response = await axios({
-    url: `${BASE_URL}/${type}/${category}`,
+    url,
     params: {
       api_key: process.env.REACT_APP_TMDB_KEY,
       language: 'ko-KR',
+      query,
     },
   });
 
