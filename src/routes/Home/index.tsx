@@ -10,8 +10,9 @@ import {
 import Track from './Track';
 
 import styles from './home.module.scss';
+import SearchBar from './SearchBar';
 
-const Search = () => {
+const Home = () => {
   const popularMovieList = useAppSelector(getPopularMovieList);
   const ratedMovieIdList = useAppSelector(getRatedMovieList);
 
@@ -21,6 +22,9 @@ const Search = () => {
 
   return (
     <div className={styles.home}>
+      <div className={styles.header}>
+        <SearchBar />
+      </div>
       <div className={styles.mainContent}>
         <Track
           trackName='Popular'
@@ -41,4 +45,4 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default Home;
