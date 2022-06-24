@@ -1,16 +1,19 @@
+import cx from 'classnames';
+
 import { IItemData } from 'types/type';
 import { genrePreset } from 'utils/genres';
-import { StarIcon } from 'assets/svgs';
+import { CloseIcon, FavoriteIcon, StarIcon } from 'assets/svgs';
 
-import Portal from 'components/portal';
+import Modal from 'components/Modal';
 
 import styles from './itemDetail.module.scss';
 
 interface IProps {
   item: IItemData;
+  closeDetail: () => void;
 }
 
-const ItemDetail = ({ item }: IProps) => {
+const ItemDetail = ({ item, closeDetail }: IProps) => {
   const genreList = item.genre.map((el) => {
     const genre = genrePreset.get(el);
 
@@ -22,26 +25,33 @@ const ItemDetail = ({ item }: IProps) => {
   });
 
   return (
-    <Portal>
-      <div className={styles.ItemDetail}>
+    <Modal closeModal={closeDetail}>
+      <div className={styles.itemDetail}>
         <div className={styles.posterWrapper}>
-          <img src={`https://image.tmdb.org/t/p/w200/${item.poster}`} alt={`movie_${item.id}`} />
+          <img src={`https://image.tmdb.org/t/p/w300/${item.poster}`} alt={`movie_${item.id}`} />
         </div>
         <div className={styles.details}>
           <p className={styles.title}>{`${item.title} (${item.release})`}</p>
-          <div className={styles.inform}>
-            {item.adult ? <span>청소년 관람불가</span> : ''}
-            <div className={styles.rating}>
+          <div className={styles.ratingWrapper}>
+            <span className={styles.rating}>
               <StarIcon />
               {item.rating}
-            </div>
-            <div className={styles.genreList}>{genreList}</div>
-            <p className={styles.overview}>{item.overview}</p>
+            </span>
           </div>
-          <button type='button'>Faborites</button>
+          <div className={styles.genreList}>{genreList}</div>
+          <p className={styles.overview}>{item.overview}</p>
+          <div className={styles.buttonWrapper}>
+            <button type='button' className={cx(styles.favoriteButton, { [styles.active]: true })}>
+              <FavoriteIcon />
+              {true ? '즐겨찾기 해제' : '즐겨찾기'}
+            </button>
+          </div>
         </div>
+        <button className={styles.closeButton} type='button' onClick={closeDetail}>
+          <CloseIcon />
+        </button>
       </div>
-    </Portal>
+    </Modal>
   );
 };
 

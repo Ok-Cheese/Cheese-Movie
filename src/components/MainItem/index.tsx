@@ -1,10 +1,10 @@
-import { useEffect, useMemo, useState } from 'react';
-import { useQuery } from 'react-query';
+import { useState } from 'react';
 
 import { IItemData } from 'types/type';
 import { StarIcon } from 'assets/svgs';
 
 import styles from './mainItem.module.scss';
+import ItemDetail from './itemDetail';
 
 interface IProps {
   item: IItemData;
@@ -13,6 +13,11 @@ interface IProps {
 const IMG_URL = `https://image.tmdb.org/t/p/w300`;
 
 const MainItem = ({ item }: IProps) => {
+  const [isDetailOpened, setIsDetailOpened] = useState(false);
+
+  const openDetail = () => setIsDetailOpened(true);
+  const closeDetail = () => setIsDetailOpened(false);
+
   return (
     <li className={styles.movieItem}>
       <img src={`${IMG_URL}/${item.poster}`} alt={`movie_${item}`} />
@@ -27,9 +32,12 @@ const MainItem = ({ item }: IProps) => {
             <StarIcon />
             {item.rating}
           </div>
-          <button type='button'>Detail</button>
+          <button type='button' onClick={openDetail}>
+            Detail
+          </button>
         </div>
       </div>
+      {isDetailOpened && <ItemDetail item={item} closeDetail={closeDetail} />}
     </li>
   );
 };
