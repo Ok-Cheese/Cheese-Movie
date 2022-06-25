@@ -13,11 +13,11 @@
   padding: 100px 10px 20px;
   background: colors.$MAIN_SECOND;
 
-  nav {
+  .menu {
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: 10px;
+    padding: 0 20px;
 
     p {
       height: 30px;
@@ -33,6 +33,23 @@
       font-weight: 600;
       color: colors.$GRAY6;
       text-decoration: none;
+      fill: colors.$GRAY6;
+
+      .menuItem {
+        @include flexbox.flexbox(flex-start, center);
+        width: 100%;
+
+        svg {
+          width: 20px;
+          height: 20px;
+          margin-right: 5px;
+        }
+      }
+    }
+
+    .active {
+      color: colors.$WHITE;
+      fill: colors.$WHITE;
     }
   }
 }

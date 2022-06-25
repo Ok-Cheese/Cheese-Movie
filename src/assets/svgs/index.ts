@@ -5,3 +5,7 @@ export { ReactComponent as CloseIcon } from './close.svg';
 export { ReactComponent as FavoriteIcon } from './heart.svg';
 export { ReactComponent as TvIcon } from './tv.svg';
 export { ReactComponent as MovieIcon } from './movie.svg';
+export { ReactComponent as FavoriteFilledIcon } from './filledHeart.svg';
+export { ReactComponent as HomeIcon } from './home.svg';
+export { ReactComponent as FireIcon } from './fire.svg';
+export { ReactComponent as PrizeIcon } from './prize.svg';

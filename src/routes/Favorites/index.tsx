@@ -1,6 +1,6 @@
 import { useAppSelector } from 'hooks';
 import { getFavoriteList } from 'states/favorites';
-import { StarIcon } from 'assets/svgs';
+import { FavoriteFilledIcon } from 'assets/svgs';
 
 import MainItem from 'components/MainItem';
 
@@ -15,7 +15,7 @@ const Favorites = () => {
     <div className={styles.favorites}>
       <div className={styles.header}>
         <h2>
-          <StarIcon /> 내 즐겨찾기
+          <FavoriteFilledIcon /> 내 즐겨찾기
         </h2>
       </div>
       <ul className={styles.favoriteList}>{favoriteItems}</ul>

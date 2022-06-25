@@ -8,12 +8,19 @@
   margin: 25px 0;
 
   .trackName {
+    @include flexbox.flexbox(start, center);
     height: 45px;
     margin: 0 20px;
     margin-bottom: 5px;
     font-size: 24px;
     font-weight: 600;
     color: colors.$WHITE;
+
+    svg {
+      width: 30px;
+      height: 30px;
+      margin-right: 5px;
+    }
   }
 
   .trackList {

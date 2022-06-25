@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from 'hooks';
 import { IItemData, TCategory, TContentType } from 'types/type';
 import { getRefDate, updateRefDate } from 'states/mainContentList';
 import { getContentList } from 'utils/contentList';
+import { FireIcon, PrizeIcon } from 'assets/svgs';
 
 import MainItem from 'components/MainItem';
 
@@ -49,9 +50,14 @@ const Track = ({ trackName, type, category, content, setContent }: IProps) => {
     return content.map((el, index) => <MainItem key={el.id} item={content[index]} />);
   }, [content]);
 
+  const titleIcon = category === 'popular' ? <FireIcon /> : <PrizeIcon />;
+
   return (
     <div className={styles.track}>
-      <p className={styles.trackName}>{trackName}</p>
+      <h2 className={styles.trackName}>
+        {titleIcon}
+        {trackName}
+      </h2>
       <ul className={styles.trackList}>
         <HorizontalScroll reverseScroll>{trackItems}</HorizontalScroll>
       </ul>
