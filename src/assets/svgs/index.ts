@@ -9,3 +9,4 @@ export { ReactComponent as FavoriteFilledIcon } from './filledHeart.svg';
 export { ReactComponent as HomeIcon } from './home.svg';
 export { ReactComponent as FireIcon } from './fire.svg';
 export { ReactComponent as PrizeIcon } from './prize.svg';
+export { ReactComponent as RankingIcon } from './ranking.svg';
