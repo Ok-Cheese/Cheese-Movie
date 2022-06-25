@@ -4,11 +4,11 @@ import { useAppSelector } from 'hooks';
 import { IItemData } from 'types/type';
 import { getHomeType } from 'states/contentTypes';
 import { getPopularMovieList, getPopularTvList } from 'states/mainContentList';
+import { RankingIcon } from 'assets/svgs';
 
 import ItemDetail from 'components/MainItem/itemDetail';
 
 import styles from './ranking.module.scss';
-import { RankingIcon } from 'assets/svgs';
 
 const Ranking = () => {
   const [isDetailOpened, setIsDetailOpened] = useState(false);

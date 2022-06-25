@@ -10,14 +10,14 @@
   align-items: center;
   width: 350px;
   height: 100%;
-  padding: 100px 10px 20px;
+  padding: 100px 0 10px;
   background: colors.$MAIN_SECOND;
 
   .menu {
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: 0 20px;
+    padding-left: 20px;
 
     p {
       height: 30px;
@@ -49,6 +49,7 @@
 
     .active {
       color: colors.$WHITE;
+      border-right: 5px solid colors.$WHITE;
       fill: colors.$WHITE;
     }
   }

@@ -4,16 +4,16 @@
 .boxOffice {
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
   justify-content: flex-end;
   width: 100%;
-  height: 100%;
 
   dl {
     display: flex;
     flex-direction: column;
-    width: 100%;
     height: 70%;
     padding: 5px;
+    margin: 0 10px;
     color: colors.$FONT_BLACK;
     background: colors.$GRAYE;
     border-radius: 5px;
