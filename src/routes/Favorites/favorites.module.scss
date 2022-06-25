@@ -10,22 +10,22 @@
     width: 100%;
     height: 75px;
     border-bottom: 1px solid colors.$GRAYA;
-  }
 
-  h2 {
-    @include flexbox.flexbox(start, center);
-    height: 45px;
-    margin: 0 20px;
-    margin-bottom: 20px;
-    font-size: 24px;
-    font-weight: 600;
-    color: colors.$WHITE;
+    h2 {
+      @include flexbox.flexbox(start, center);
+      height: 45px;
+      margin: 0 20px;
+      margin-bottom: 20px;
+      font-size: 24px;
+      font-weight: 600;
+      color: colors.$WHITE;
 
-    svg {
-      width: 24px;
-      height: 24px;
-      margin-right: 5px;
-      fill: colors.$PINK;
+      svg {
+        width: 24px;
+        height: 24px;
+        margin-right: 5px;
+        fill: colors.$PINK;
+      }
     }
   }
 
@@ -34,5 +34,6 @@
     grid-template-rows: repeat(auto-fit, 450px);
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     grid-gap: 20px;
+    margin: 25px 0;
   }
 }
