@@ -8,6 +8,7 @@ import { getPopularMovieList, getPopularTvList } from 'states/mainContentList';
 import ItemDetail from 'components/MainItem/itemDetail';
 
 import styles from './ranking.module.scss';
+import { RankingIcon } from 'assets/svgs';
 
 const Ranking = () => {
   const [isDetailOpened, setIsDetailOpened] = useState(false);
@@ -27,7 +28,7 @@ const Ranking = () => {
 
     return popularList.map((el, index) => {
       return (
-        <div key={el.id}>
+        <div key={el.id} className={styles.itemWrapper}>
           <dt className={styles.rank}>{index + 1}</dt>
           <dd className={styles.el}>
             <button type='button' onClick={() => openDetail(el)}>
@@ -44,7 +45,10 @@ const Ranking = () => {
   return (
     <div className={styles.boxOffice}>
       <dl>
-        <p>일간 순위</p>
+        <div className={styles.rankingTitle}>
+          <RankingIcon />
+          {`일간 순위 (${contentType === 'movie' ? '영화' : 'TV'})`}
+        </div>
         {rankingContent}
       </dl>
       {isDetailOpened && <ItemDetail item={selectedItem || popularList[0]} closeDetail={closeDetail} />}
