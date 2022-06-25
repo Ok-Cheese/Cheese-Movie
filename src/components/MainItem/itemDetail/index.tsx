@@ -1,7 +1,10 @@
+import { useState } from 'react';
 import cx from 'classnames';
 
+import { useAppDispatch, useAppSelector } from 'hooks';
 import { IItemData } from 'types/type';
 import { genrePreset } from 'utils/genres';
+import { getFavoriteList, addFavoriteContent, removeFavoriteContent } from 'states/favorites';
 import { CloseIcon, FavoriteIcon, StarIcon } from 'assets/svgs';
 
 import Modal from 'components/Modal';
@@ -14,6 +17,22 @@ interface IProps {
 }
 
 const ItemDetail = ({ item, closeDetail }: IProps) => {
+  const favoriteList = useAppSelector(getFavoriteList);
+  const [isAddedFavoriteList, setIsAddedFavoriteList] = useState(Boolean(favoriteList.find((el) => el.id === item.id)));
+
+  const dispatch = useAppDispatch();
+
+  const toggleFavorite = () => {
+    setIsAddedFavoriteList((prev) => !prev);
+
+    if (isAddedFavoriteList) {
+      dispatch(removeFavoriteContent(item.id));
+      return;
+    }
+
+    dispatch(addFavoriteContent(item));
+  };
+
   const genreList = item.genre.map((el) => {
     const genre = genrePreset.get(el);
 
@@ -41,9 +60,13 @@ const ItemDetail = ({ item, closeDetail }: IProps) => {
           <div className={styles.genreList}>{genreList}</div>
           <p className={styles.overview}>{item.overview}</p>
           <div className={styles.buttonWrapper}>
-            <button type='button' className={cx(styles.favoriteButton, { [styles.active]: true })}>
+            <button
+              type='button'
+              className={cx(styles.favoriteButton, { [styles.active]: isAddedFavoriteList })}
+              onClick={toggleFavorite}
+            >
               <FavoriteIcon />
-              {true ? '즐겨찾기 해제' : '즐겨찾기'}
+              {isAddedFavoriteList ? '즐겨찾기 해제' : '즐겨찾기'}
             </button>
           </div>
         </div>

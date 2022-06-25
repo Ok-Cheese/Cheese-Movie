@@ -1,0 +1,30 @@
+@use '/src/styles/constants/colors';
+
+.favorites {
+  padding: 50px;
+  margin-left: 350px;
+
+  h2 {
+    display: flex;
+    align-items: center;
+    height: 45px;
+    margin: 0 20px;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: 600;
+    color: colors.$WHITE;
+
+    svg {
+      width: 24px;
+      height: 24px;
+      fill: colors.$YELLOW;
+    }
+  }
+
+  .favoriteList {
+    display: grid;
+    grid-template-rows: repeat(auto-fit, 450px);
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 20px;
+  }
+}

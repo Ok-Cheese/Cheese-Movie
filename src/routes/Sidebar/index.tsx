@@ -18,7 +18,7 @@ const Sidebar = () => {
           <span>영화 검색</span>
         </NavLink>
         <NavLink
-          to='/bookmark'
+          to='/favorites'
           style={({ isActive }) => ({
             color: isActive ? '#fefefe' : '',
           })}

@@ -1,20 +1,19 @@
-import { useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
 
-import Loading from '../components/Loading';
 import Home from './Home';
-
-import styles from './routes.module.scss';
+import Favorites from './Favorites';
 import Sidebar from './Sidebar';
 
+import styles from './routes.module.scss';
+
 const App = () => {
-  const [isLoading, setIsLoading] = useState(false);
-
-  const content = isLoading ? <Loading /> : <Home />;
-
   return (
     <div className={styles.app}>
       <Sidebar />
-      {content}
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/favorites' element={<Favorites />} />
+      </Routes>
     </div>
   );
 };
