@@ -3,6 +3,7 @@ export type TCategory = 'popular' | 'top_rated' | 'search';
 
 export interface IItemData {
   id: number;
+  type: TContentType;
   poster: string | null;
   overview: string;
   rating: number;

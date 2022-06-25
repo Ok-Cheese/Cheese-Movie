@@ -58,6 +58,7 @@ export const getContentList = async (type: TContentType, category: TCategory, qu
   const result: IDefaultResponse[] = await response.data.results.slice(0, 10);
   const convertedResult = result.map((el) => {
     return {
+      type,
       id: el.id,
       poster: el.poster_path,
       overview: el.overview,
