@@ -1,27 +1,43 @@
+import { useMemo, useState } from 'react';
+
 import { useAppSelector } from 'hooks';
-import { useMemo } from 'react';
-import { getPopularMovieList } from 'states/mainContentList';
+import { IItemData } from 'types/type';
+import { getHomeType } from 'states/contentTypes';
+import { getPopularMovieList, getPopularTvList } from 'states/mainContentList';
+
+import ItemDetail from 'components/MainItem/itemDetail';
 
 import styles from './ranking.module.scss';
 
 const Ranking = () => {
-  const popularMovieList = useAppSelector(getPopularMovieList);
-  const movieRanking = popularMovieList.map(({ id, title }) => {
-    return { id, title };
-  });
+  const [isDetailOpened, setIsDetailOpened] = useState(false);
+  const [selectedItem, setSelectedItem] = useState<IItemData | null>(null);
+
+  const contentType = useAppSelector(getHomeType);
+  const popularList = useAppSelector(contentType === 'movie' ? getPopularMovieList : getPopularTvList);
+
+  const openDetail = (item: IItemData) => {
+    setSelectedItem(item);
+    setIsDetailOpened(true);
+  };
+  const closeDetail = () => setIsDetailOpened(false);
 
   const rankingItem = useMemo(() => {
-    if (!movieRanking) return '';
+    if (!popularList) return '';
 
-    return movieRanking.map((movie, index) => {
+    return popularList.map((el, index) => {
       return (
-        <div key={movie.id}>
+        <div key={el.id}>
           <dt className={styles.rank}>{index + 1}</dt>
-          <dd className={styles.movie}>{movie.title}</dd>
+          <dd className={styles.el}>
+            <button type='button' onClick={() => openDetail(el)}>
+              {el.title}
+            </button>
+          </dd>
         </div>
       );
     });
-  }, [movieRanking]);
+  }, [popularList]);
 
   const rankingContent = rankingItem || <p>순위를 가져오는데 실패했습니다.</p>;
 
@@ -31,6 +47,7 @@ const Ranking = () => {
         <p>일간 순위</p>
         {rankingContent}
       </dl>
+      {isDetailOpened && <ItemDetail item={selectedItem || popularList[0]} closeDetail={closeDetail} />}
     </div>
   );
 };

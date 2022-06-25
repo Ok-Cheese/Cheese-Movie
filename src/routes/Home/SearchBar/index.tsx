@@ -7,9 +7,11 @@ import { getSearchWord, setSearchResult, setSearchWord } from 'states/search';
 import { SearchIcon } from 'assets/svgs';
 
 import styles from './searchBar.module.scss';
+import { getHomeType } from 'states/contentTypes';
 
 const SearchBar = () => {
   const searchWord = useAppSelector(getSearchWord);
+  const contentType = useAppSelector(getHomeType);
 
   const dispatch = useAppDispatch();
 
@@ -37,11 +39,12 @@ const SearchBar = () => {
 
   const submitHander = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     if (searchWord.trim() === '') return;
 
     refetch();
   };
+
+  const placeholder = contentType === 'movie' ? '영화 제목을 입력해주세요' : '프로그램 제목을 입력해주세요.';
 
   return (
     <form className={styles.searchBar} onSubmit={submitHander}>
@@ -51,7 +54,7 @@ const SearchBar = () => {
           className={styles.searchInput}
           value={searchWord}
           onChange={changeInputHandler}
-          placeholder='영화 제목을 입력해주세요.'
+          placeholder={placeholder}
         />
         <button type='submit'>
           <SearchIcon />

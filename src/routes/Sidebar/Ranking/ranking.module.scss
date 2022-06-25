@@ -42,20 +42,16 @@
       dd {
         width: 100%;
         margin: 0 5px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        word-break: break-all;
-        white-space: nowrap;
-      }
 
-      .ratio {
-        width: 50px;
-        font-weight: 500;
-        color: colors.$RED;
-      }
-
-      .increase {
-        color: colors.$GREEN;
+        button {
+          width: 100%;
+          overflow: hidden;
+          font-size: 16px;
+          color: colors.$WHITE;
+          text-overflow: ellipsis;
+          word-break: break-all;
+          white-space: nowrap;
+        }
       }
     }
   }
