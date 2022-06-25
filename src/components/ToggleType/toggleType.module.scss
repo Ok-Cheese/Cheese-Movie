@@ -1,0 +1,36 @@
+@use '/src/styles/mixins/flexbox';
+@use '/src/styles/constants/colors';
+
+.buttonWrapper {
+  display: flex;
+  align-items: center;
+  height: 100%;
+
+  .toggleTypeButton {
+    @include flexbox.flexbox(center, center);
+    width: 100px;
+    height: 30px;
+    font-size: 16px;
+    color: colors.$SUB_FIRST;
+
+    svg {
+      height: 24px;
+      margin-right: 3px;
+      fill: colors.$SUB_FIRST;
+    }
+  }
+
+  .active {
+    @include flexbox.flexbox(center, center);
+    width: 100px;
+    height: 30px;
+    font-size: 16px;
+    color: colors.$WHITE;
+
+    svg {
+      height: 24px;
+      margin-right: 3px;
+      fill: colors.$WHITE;
+    }
+  }
+}
