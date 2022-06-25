@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import store from 'store';
 
 import { RootState } from 'states';
 import { IItemData } from 'types/type';
@@ -7,8 +8,10 @@ interface IFavorties {
   favorites: IItemData[];
 }
 
+const savedFavoriteList = store.get('favoriteList');
+
 const INIT_FAVORITES: IFavorties = {
-  favorites: [],
+  favorites: savedFavoriteList ? savedFavoriteList.favorites : [],
 };
 
 const favoritesSlice = createSlice({
@@ -17,10 +20,12 @@ const favoritesSlice = createSlice({
   reducers: {
     addFavoriteContent: (state: IFavorties, action: PayloadAction<IItemData>) => {
       state.favorites.push(action.payload);
+      store.set('favoriteList', state);
     },
     removeFavoriteContent: (state: IFavorties, action: PayloadAction<number>) => {
       const targetIndex = state.favorites.findIndex((el) => el.id === action.payload);
       state.favorites.splice(targetIndex, 1);
+      store.set('favoriteList', state);
     },
   },
 });
