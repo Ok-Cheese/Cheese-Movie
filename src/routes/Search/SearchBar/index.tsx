@@ -4,14 +4,14 @@ import { useQuery } from 'react-query';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { getContentList } from 'utils/contentList';
 import { getSearchWord, setSearchResult, setSearchWord } from 'states/search';
+import { getSearchType } from 'states/contentTypes';
 import { SearchIcon } from 'assets/svgs';
 
 import styles from './searchBar.module.scss';
-import { getHomeType } from 'states/contentTypes';
 
 const SearchBar = () => {
   const searchWord = useAppSelector(getSearchWord);
-  const contentType = useAppSelector(getHomeType);
+  const contentType = useAppSelector(getSearchType);
 
   const dispatch = useAppDispatch();
 
