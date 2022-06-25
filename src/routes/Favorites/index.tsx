@@ -13,9 +13,11 @@ const Favorites = () => {
 
   return (
     <div className={styles.favorites}>
-      <h2>
-        <StarIcon /> 내 즐겨찾기
-      </h2>
+      <div className={styles.header}>
+        <h2>
+          <StarIcon /> 내 즐겨찾기
+        </h2>
+      </div>
       <ul className={styles.favoriteList}>{favoriteItems}</ul>
     </div>
   );

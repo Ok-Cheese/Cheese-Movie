@@ -1,12 +1,19 @@
 @use '/src/styles/constants/colors';
+@use '/src/styles/mixins/flexbox';
 
 .favorites {
   padding: 50px;
   margin-left: 350px;
 
+  .header {
+    @include flexbox.flexbox(start, center);
+    width: 100%;
+    height: 75px;
+    border-bottom: 1px solid colors.$GRAYA;
+  }
+
   h2 {
-    display: flex;
-    align-items: center;
+    @include flexbox.flexbox(start, center);
     height: 45px;
     margin: 0 20px;
     margin-bottom: 20px;
