@@ -14,7 +14,14 @@ const SearchResult = () => {
     return searchResult.map((el, index) => <MainItem key={el.id} item={searchResult[index]} />);
   }, [searchResult]);
 
-  return <div className={styles.searchResult}>{itemList}</div>;
+  const content =
+    searchResult.length > 0 ? (
+      <ul className={styles.itemList}>{itemList}</ul>
+    ) : (
+      <p className={styles.noReults}>검색 결과가 없습니다.</p>
+    );
+
+  return <div className={styles.searchResult}>{content}</div>;
 };
 
 export default SearchResult;

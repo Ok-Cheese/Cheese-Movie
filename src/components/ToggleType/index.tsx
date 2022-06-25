@@ -10,7 +10,7 @@ import {
   setSearchTypeToMovie,
   setSearchTypeToTv,
 } from 'states/contentTypes';
-import { setSearchResult } from 'states/search';
+import { setSearchResult, setSearchWord } from 'states/search';
 import { MovieIcon, TvIcon } from 'assets/svgs';
 
 import styles from './toggleType.module.scss';
@@ -30,6 +30,7 @@ const ToggleType = ({ page }: IProps) => {
       return;
     }
 
+    dispatch(setSearchWord(''));
     dispatch(setSearchResult([]));
     dispatch(setSearchTypeToMovie());
   };
@@ -40,6 +41,7 @@ const ToggleType = ({ page }: IProps) => {
       return;
     }
 
+    dispatch(setSearchWord(''));
     dispatch(setSearchResult([]));
     dispatch(setSearchTypeToTv());
   };

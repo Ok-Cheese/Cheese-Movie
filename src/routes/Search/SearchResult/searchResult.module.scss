@@ -1,6 +1,19 @@
+@use '/src/styles/constants/colors';
+
 .searchResult {
-  display: grid;
-  grid-template-rows: repeat(auto-fit, 450px);
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  grid-gap: 20px;
+  width: 100%;
+
+  .itemList {
+    display: grid;
+    grid-template-rows: repeat(auto-fit, 450px);
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 20px;
+  }
+
+  .noReults {
+    margin-top: 30%;
+    font-size: 24px;
+    color: colors.$WHITE;
+    text-align: center;
+  }
 }
