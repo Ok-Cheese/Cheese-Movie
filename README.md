@@ -9,6 +9,8 @@
 ![1](https://img.shields.io/badge/TS-3178C6?style=plastic&logo=TypeScript&logoColor=white)
 ![1](https://img.shields.io/badge/Redux-764ABC?style=plastic&logo=Redux&logoColor=white)
 
+<br>
+
 ## Usage
 ![image](https://user-images.githubusercontent.com/90900744/176592731-fa1d8602-c514-4c40-8dc0-b260882cf32b.png)
 
@@ -27,3 +29,8 @@
 * 컨텐츠의 Detail을 클릭하면 영화 소개 및 장르 확인
 * 하단의 즐겨찾기 버튼을 눌러 즐겨찾기에 추가 또는 즐겨찾기 해제
 * 즐겨찾기 메뉴에서 즐겨찾기한 
+
+<br>
+
+## API
+[TMDB API](https://developers.themoviedb.org/3/getting-started/introduction)
