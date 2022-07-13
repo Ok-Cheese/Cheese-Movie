@@ -7,7 +7,7 @@ import styles from './sidebar.module.scss';
 
 const Sidebar = () => {
   return (
-    <div className={styles.sidebar}>
+    <aside className={styles.sidebar}>
       <nav className={styles.menu}>
         <p>메뉴</p>
         <NavLink to='/' className={({ isActive }) => (isActive ? styles.active : '')}>
@@ -30,7 +30,7 @@ const Sidebar = () => {
         </NavLink>
       </nav>
       <Ranking />
-    </div>
+    </aside>
   );
 };
 
